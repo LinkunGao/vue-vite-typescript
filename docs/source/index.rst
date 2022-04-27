@@ -6,6 +6,7 @@
 Welcome to Vue3+typescript+vite's documentation!
 =================================================
 
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -14,4 +15,7 @@ Welcome to Vue3+typescript+vite's documentation!
    vite/index
    vue/index
    deploy_environment/index
+   thanks/index
+
+
 
