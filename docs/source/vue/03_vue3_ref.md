@@ -92,9 +92,74 @@ let message = ref<string | number>("hello world");
 
 ## isRef
 
+To determine if a variable is ref or not.
+
+```ts
+let notRef: number = 1;
+console.log(isRef(notRef));
+```
+
 ## shallowRef
 
+shallowRef will prevent the object attribute to be responsive change.
+
+```ts
+// this way is not work, because the message onject now is not responsive
+let message = shallowRef({
+  name: "hello world",
+});
+
+message.value.name = "change the world";
+
+// we can do this way
+
+message.value = {
+  name: "change the world",
+};
+```
+
 ## triggerRef
+
+triggerRef is used in conjunction with shallowRef.
+To forced page response the changed variable.
+
+```ts
+let message = shallowRef({
+  name: "hello world",
+});
+
+message.value.name = "change the world";
+triggerRef(message);
+```
+
+## customRef
+
+To custom a personalized ref.
+
+```ts
+import { customRef } from "vue";
+
+function myRef<T>(value: T) {
+  return customRef((track, trigger) => {
+    return {
+      get() {
+        track();
+        return value;
+      },
+      set(newVal: T) {
+        console.log("set value");
+        value = newVal;
+        trigger();
+      },
+    };
+  });
+}
+
+let message = myRef<string>("hello world!");
+const changeMsg = () => {
+  message.value = "change the world!!!";
+};
+```
 
 ## toRef
 
