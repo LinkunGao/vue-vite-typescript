@@ -9,11 +9,27 @@
 </template>
 
 <script setup lang="ts">
-import { ref, Ref } from "vue";
+import { customRef } from "vue";
 
-let message: Ref<string> = ref("hello world");
+function myRef<T>(value: T) {
+  return customRef((track, trigger) => {
+    return {
+      get() {
+        track();
+        return value;
+      },
+      set(newVal: T) {
+        console.log("set value");
+        value = newVal;
+        trigger();
+      },
+    };
+  });
+}
+
+let message = myRef<string>("hello world!");
 const changeMsg = () => {
-  message.value = "change the world";
+  message.value = "change the world!!!";
 };
 </script>
 
