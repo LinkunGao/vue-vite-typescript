@@ -69,7 +69,7 @@ import { ractive, readonly } from "vue";
 const person = reactive({ count: 1 });
 const copy = readonly(person);
 
-copy.count++;
+// copy.count++; cannot do this
 ```
 
 ## shallowReactive
